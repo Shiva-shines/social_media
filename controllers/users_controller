@@ -1,16 +1,47 @@
+const User = require('../models/users');
+
 module.exports.profile = function(req,res ){
     return res.render('profile',{
         title:"Profile"
     })
 }
 
+// render sign-in page
 module.exports.signIn = function(req, res){
     return res.render('users_sign_in',{
         title:"Codial/Sign-in"
     })
 }
+
+// render log-in page
 module.exports.logIn = function(req, res){
     return res.render('users_log_in',{
         title:"Codial/Log-in"
     })
+}
+
+// get sign_in data
+module.exports.create = function(req, res){
+User.findOne({email:req.body.email}, function(err, user){
+    if(err){
+        console.log('error in finding users in signing up');
+        return;
+    }
+    if(!user){
+        User.create(req.body , function(err, user){
+            if(err){
+                console.log('error in creating user while signing up');
+                return;
+            }
+            return res.redirect('/users/sign-in');
+        })
+    }else{
+        return res.redirect('back');
+    }
+});
+}
+
+// get log-in data
+module.exports.createSession = function(req, res){
+
 }
