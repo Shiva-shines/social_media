@@ -1,20 +1,23 @@
 const User = require('../models/users');
 
 module.exports.profile = function(req, res){
-    if(req.cookies.user_id){
-        User.findById(req.cookies.user_id , function(err, user){
-            if(user){
-                return res.render('profile',{
-                    title:"Profile",
-                    user:user
-        })
-    }
-    return res.redirect('/users/log-in');
-    });}
-    else{
-        return res.redirect('/users/log-in');
-    }
-}
+    // if(req.cookies.user_id){
+    //     User.findById(req.cookies.user_id , function(err, user){
+    //         if(user){
+    //             return res.render('profile',{
+    //                 title:"Profile",
+    //                 user:user
+    //     })
+    // // }
+    // return res.redirect('/users/log-in');
+    
+    // else{
+    //     return res.redirect('/users/log-in');
+    // }
+    return res.render('profile',{
+                     title:"Profile",
+                     user:req.user
+          })}
     
 
 // render sign-in page
@@ -54,30 +57,6 @@ User.findOne({email:req.body.email}, function(err, user){
 
 // get log-in data
 module.exports.createSession = function(req, res){
-User.findOne({email:req.body.email}, function(err, user){
-    if(user){
-    if(err){
-        console.log('error in creating user while signing up');
-        return res.redirect('/');
-    }
-    if(user){
-        // password does not match
-        if(user.password != req.body.password){
-            // console.log("password does not match");
-            return res.redirect('back');
-            
-        }
-        // handle session creation
-        res.cookie('user_id' , user.id);
-        //  console.log("session created");
-        return res.redirect('/users/profile');
-
-    }}
-    // handle user not found
-    else{
-        // console.log("back");
-           return res.redirect('back');
-           
-    }
-})
+return res.redirect('/users/profile');
 }
+
