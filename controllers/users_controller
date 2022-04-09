@@ -47,7 +47,7 @@ module.exports.logIn = function(req, res){
     })}
 }
 
-// get log_in data
+// get sign_in data
 module.exports.create = function(req, res){
 User.findOne({email:req.body.email}, function(err, user){
     if(err){
