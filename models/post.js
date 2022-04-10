@@ -1,7 +1,7 @@
-const { default: mongoose } = require('mongoose');
-const postSchema = require('mongoose');
 
+const mongoose= require('mongoose');
 
+// here
 const postSchema = new mongoose.Schema({
     content:{
         type:String,
@@ -9,7 +9,7 @@ const postSchema = new mongoose.Schema({
     },
     user:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        ref:'Users'
     }
 },{
     timestamps:true
