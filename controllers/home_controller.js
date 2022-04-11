@@ -28,10 +28,12 @@ module.exports.home = function(req, res){
         if(err){
             console.log(err);
         }
-        
+        User.find({}, function(err , users){
             return res.render('home', {
             title: "Codeial | Home",
-            posts:  posts
+            posts:  posts,
+            all_users: users
+        });
         });
     })
 
