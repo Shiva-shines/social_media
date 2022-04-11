@@ -1,5 +1,6 @@
 const User = require('../models/users');
 const passport = require('passport');
+const { request } = require('express');
 
 module.exports.profile = function(req, res){
     // if(req.cookies.user_id){
@@ -85,11 +86,13 @@ User.findOne({email:req.body.email}, function(err, user){
 
 // get log-in data
 module.exports.createSession = function(req, res){
+    req.flash('success' , 'logged-in successfulli !');
 return res.redirect('/');
 }
 
 module.exports.destroySession = function(req, res){
     req.logout();
+    req.flash('success' , 'logged-out successfulli !');
     return res.redirect('/');
 }
 

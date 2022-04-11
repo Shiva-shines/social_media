@@ -6,6 +6,14 @@
     </head>
     <body>
         <%- include('_header'); %>
+         <% if(flash.success && flash.success.length){ %>
+
+              <h5>
+                  <%= flash.success%>
+              </h5>
+
+            <% } %>
+
       <%- body %>
         <%- include('_fotter'); %>
         <%- script %>
